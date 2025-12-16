@@ -111,7 +111,7 @@ function CoalDim(c, d)
     B = [zeros(b,a) -eye(b)];
     rk = rank([JF; B]); % nxn that varnish (Check)
     sz = size([JF; B]); % The size function returns the dimensions of an array (we take the second entry)
-    \"The dimension of the variety is \" + string(a - (sz(2) - rk))
+    \"The dimension of the variety is \" + string(a - (sz(2) - double(rk)))
 end"
             write(file, str)
         end
