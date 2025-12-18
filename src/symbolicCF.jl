@@ -27,7 +27,6 @@ function network_expectedCF_formulas(net::HybridNetwork;
     inheritancecorrelation=0, 
     symbolic=false::Bool)
     
-    
     # ESA -- possible fix to network edge number problem.  This requires the user to reset the edge numbers, and
     # therefore we do not need to add a ! to the function name.
     

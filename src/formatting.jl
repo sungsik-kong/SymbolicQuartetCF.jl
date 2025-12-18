@@ -1,3 +1,9 @@
+"""
+        function export_csv(df; filename="symCF_output"::String)
+
+# Description
+- Print symbolic CFs to csv file. 
+"""
 function export_csv(df; filename="symCF_output"::String)
     df_clean=cleanLabels(deepcopy(df))
     CSV.write("$filename.csv",df_clean,header=false)
@@ -16,7 +22,10 @@ end
 
 # Description
 - Print symbolic CFs to csv file. (default)
-- Format symbolic CF formulas for use in Macaulay2, Singular, and Matlab.
+- Format symbolic CF formulas for use in Macaulay2, Singular, and Matlab when 
+        Booleans `macaulay2`, `matlab`, and/or `singular` are true.  When
+        `multigraded` is true,additional Macaulay2 code for implicitization 
+        using the MultigradedImplicitization package in Macaulay2 is written.
 """
 function export_symbolic_format(net, df;
     inheritancecorrelation=0.0::Float64,
