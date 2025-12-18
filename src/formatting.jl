@@ -16,7 +16,7 @@ end
 
 # Description
 - Print symbolic CFs to csv file. (default)
-- Format symbolic CF formulas for use in macaulay2, Matlab, and Singular.
+- Format symbolic CF formulas for use in Macaulay2, Singular, and Matlab.
 """
 function export_symbolic_format(net, df;
     inheritancecorrelation=0.0::Float64,
@@ -118,7 +118,6 @@ end"
     end
     
     if(multigraded)
-        #filename*="_macaulay"
         open("$(filename)_im.m2", "w") do file
             str="needsPackage \"MultigradedImplicitization\"\n"
             str*="R = QQ["

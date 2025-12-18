@@ -1,5 +1,5 @@
 """
-    readTopologyrand(net; scaleparameter::Float64=1.0, decimalpoints::Integer=dpoints)
+    read_topology_rand(net; scaleparameter::Float64=1.0, decimalpoints::Integer=dpoints)
 
 Assigns randomized edge lengths and inheritance probabilities to a phylogenetic network.
 
@@ -32,7 +32,7 @@ that are suitable for testing or downstream processing, but not meant to represe
 - This function will throw an error if any hybrid node does not have exactly two incoming edges.
 - The parameters generated are arbitrary placeholders and should not be interpreted as biologically realistic.
 """
-function readTopologyrand(net;scaleparameter::Float64=1.0,decimalpoints::Integer=dpoints)
+function read_topology_rand(net;scaleparameter::Float64=1.0,decimalpoints::Integer=dpoints)
     #---------read in topology: input is either newick string or HybridNetwork object---------#
     if net isa PhyloNetworks.HybridNetwork
     else net=PhyloNetworks.readnewick(net) end
@@ -226,7 +226,7 @@ end
 
 
 """
-    makeEdgeLabel(net::HybridNetwork; showTerminalEdgeLabels::Bool=false)
+    make_edge_label(net::HybridNetwork; showTerminalEdgeLabels::Bool=false)
 
 Generates a dataframe mapping edge numbers to their symbolic labels.
 
@@ -249,7 +249,7 @@ This function is only used for pretty plotting of the network with PhyloPlots.
   - `number`: Edge numbers.
   - `label`: Corresponding symbolic labels (`"t1, γ = g1"`).
 """
-function makeEdgeLabel(net::PhyloNetworks.HybridNetwork; showAllEdgeLabels::Bool=false)
+function make_edge_label(net::PhyloNetworks.HybridNetwork; showAllEdgeLabels::Bool=false)
   
   # get internal edge numbers unless want all edges labeled
   edge_numbers_to_include = [e.number for e in net.edge if !PhyloNetworks.getchild(e).leaf || showAllEdgeLabels]

@@ -18,9 +18,9 @@ module SymbolicQuartetCF
     aloha,
     export_csv, 
     export_symbolic_format, 
-    readTopologyrand,
+    read_topology_rand,
     network_expectedCF_formulas, 
-    makeEdgeLabel, 
+    make_edge_label, 
     assignBinaryEdgeLengths
 
     include("misc.jl")

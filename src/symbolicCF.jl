@@ -27,12 +27,15 @@ function network_expectedCF_formulas(net::HybridNetwork;
     inheritancecorrelation=0, 
     symbolic=false::Bool)
     
-    # Dec 17: commenting out for now, to test code
-    # 
+    
     # ESA -- possible fix to network edge number problem.  This requires the user to reset the edge numbers, and
     # therefore we do not need to add a ! to the function name.
-    # DEC 17 sort([e.number for e in net.edge])[end] == length(net.edge) || error("The edges are not numbered consecutively from 1 to $(length(net.edge)).  Please run PhyloNetworks.resetedgenumbers!() first.  Exiting.")
     
+    # Dec 17: commenting out line below for now, to test code
+    # sort([e.number for e in net.edge])[end] == length(net.edge) || error("The edges are not numbered consecutively from 1 to $(length(net.edge)).  Please run PhyloNetworks.resetedgenumbers!() first.  Exiting.")
+    #
+    # This would need to added to make_edge_label and elsewhere too.
+
     # data frame for CFs and dictionary translation
     df = DataFrame(Split=String[], CF=String[]) 
     synth_e_dict = Dict()
@@ -46,9 +49,6 @@ function network_expectedCF_formulas(net::HybridNetwork;
         end
         for (k, e) in enumerate(incoming)
             e.gamma = round(e.gamma, digits=dpoints)
-            #synth_e_dict[e.gamma] = k == 1 ? "$rLab{$j}" : "(1-$rLab{$j})"
-            # ESA now changing to gLab
-            # synth_e_dict[(PN.getparent(e).number, PN.getchild(e).number, e.gamma)] = k == 1 ? "$rLab{$j}" : "(1-$rLab{$j})" 
             synth_e_dict[(PN.getparent(e).number, PN.getchild(e).number, e.gamma)] = k == 1 ? "$gLab{$j}" : "(1-$gLab{$j})"            
         end
     end
@@ -104,8 +104,6 @@ function network_expectedCF_formulas(net::HybridNetwork;
     end
     showprogressbar && print("\n")
     
-    #for (key, value) in synth_e_dict println("$key => $value") end
-    
     return quartet, taxa, df
 end
 
@@ -132,7 +130,7 @@ function network_expectedCF!(quartet::PN.QuartetT{MVector{3,Float64}},
     df,
     symbolic,
     synth_e_dict)
-    #create an array that stores the CF formulas for ab|cd, ac|bd, ad|bc
+    # create an array that stores the CF formulas for ab|cd, ac|bd, ad|bc
     qCFp=String["","",""] 
     
     net = deepcopy(net)
@@ -147,9 +145,7 @@ function network_expectedCF!(quartet::PN.QuartetT{MVector{3,Float64}},
     q,qCFp=network_expectedCF_4taxa!(net, taxa[quartet.taxonnumber], inheritancecorrelation, qCFp, symbolic, synth_e_dict)
     quartet.data .= q
     
-    #storing the equations to DataFrames
-    #println(qCFp)
-    #qCFp = [filter(!isspace, replace(x, "&" => "")) for x in qCFp[1:3]]
+    # storing the equations to DataFrames
     qCFp = [filter(!isspace,x) for x in qCFp[1:3]]
     f = taxa[quartet.taxonnumber]
     pairs = [(1,2,3,4), (1,3,2,4), (1,4,2,3)]
