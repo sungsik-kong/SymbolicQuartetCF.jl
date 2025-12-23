@@ -1,3 +1,49 @@
+function symCF(network::HybridNetwork; 
+                showprogressbar=false, 
+                inheritancecorrelation=0, 
+                symbolic=false::Bool,
+                filename="symCF_output"::String,
+                csv=true::Bool,
+                macaulay2=false::Bool,
+                matlab=false::Bool,
+                multigraded=false::Bool,
+                singular=false::Bool,
+                showAllEdgeLabels::Bool=false
+                )
+
+    #reindex net
+    net=reindex_edges(deepcopy(network))
+
+    #get outputs
+    quartet, taxa, df = network_expectedCF_formulas(net; 
+                                                    showprogressbar=showprogressbar, 
+                                                    inheritancecorrelation=inheritancecorrelation,
+                                                    symbolic=symbolic)
+    
+    #SK: Throw an error (or warning) when symbolic = false && macaulay2/matlab... = true
+    !symbolic && (macaulay2 || matlab || multigraded || singular) && error("Failed to reformat because symbolic CFs were not generated. Set symbolic=true."   )
+    #use df to reformat
+    export_symbolic_format(net, df;
+                            inheritancecorrelation=inheritancecorrelation,
+                            filename=filename,
+                            csv=csv,
+                            macaulay2=macaulay2,
+                            matlab=matlab,
+                            multigraded=multigraded,
+                            singular=singular)
+    
+    #plot using Phyloplots
+    edgelab=make_edge_label(net;showAllEdgeLabels=showAllEdgeLabels)
+    PhyloPlots.plot(net,edgelabel=edgelab)
+
+    return quartet, taxa, df
+end
+
+
+
+
+
+
 """
     network_expectedCF_formulas(net::HybridNetwork;
         showprogressbar=false,
@@ -29,11 +75,14 @@ function network_expectedCF_formulas(net::HybridNetwork;
     
     # ESA -- possible fix to network edge number problem.  This requires the user to reset the edge numbers, and
     # therefore we do not need to add a ! to the function name.
-    
+        
     # Dec 17: commenting out line below for now, to test code
     # sort([e.number for e in net.edge])[end] == length(net.edge) || error("The edges are not numbered consecutively from 1 to $(length(net.edge)).  Please run PhyloNetworks.resetedgenumbers!() first.  Exiting.")
     #
     # This would need to added to make_edge_label and elsewhere too.
+
+    #SK: this might be an option
+    #net=reindex_edges(deepcopy(network))
 
     # data frame for CFs and dictionary translation
     df = DataFrame(Split=String[], CF=String[]) 
