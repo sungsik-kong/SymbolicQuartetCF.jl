@@ -224,6 +224,41 @@ function gettingSymbolicInput(net::HybridNetwork, df, inheritancecorrelation)
     return sort!(params)
 end
 
+"""
+    reindex_edges(net::HybridNetwork)
+
+Re-index edge numbers. 
+
+## Description
+Internal tree edge numbers begin from 1, 
+hybrid edges begin from (total number of edges - number of leaves), 
+adn terminal edges begin from the total number of edges in descending order.
+
+## Arguments
+- `net`: A `HybridNetwork` object.
+
+## Returns
+- `net`: An updated `HybridNetwork` object.
+"""
+function reindex_edges(net::HybridNetwork)
+    internal_idx = 1
+    hybrid_idx   = length(net.edge) - net.numtaxa
+    leaf_idx     = length(net.edge)
+    for edge in net.edge
+        child = PhyloNetworks.getchild(edge)
+        if !child.leaf && !child.hybrid
+            edge.number = internal_idx
+            internal_idx += 1
+        elseif !child.leaf
+            edge.number = hybrid_idx
+            hybrid_idx -= 1
+        else
+            edge.number = leaf_idx
+            leaf_idx -= 1
+        end
+    end
+    return net
+end
 
 """
     make_edge_label(net::HybridNetwork; showTerminalEdgeLabels::Bool=false)
@@ -250,7 +285,7 @@ This function is only used for pretty plotting of the network with PhyloPlots.
   - `label`: Corresponding symbolic labels (`"t1, γ = g1"`).
 """
 function make_edge_label(net::PhyloNetworks.HybridNetwork; showAllEdgeLabels::Bool=false)
-  
+
   # get internal edge numbers unless want all edges labeled
   edge_numbers_to_include = [e.number for e in net.edge if !PhyloNetworks.getchild(e).leaf || showAllEdgeLabels]
   
