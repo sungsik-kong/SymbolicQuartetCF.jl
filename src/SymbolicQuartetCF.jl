@@ -3,6 +3,7 @@ module SymbolicQuartetCF
     using CSV
     using DataFrames
     using PhyloNetworks
+    using PhyloPlots
     using StaticArrays
     import Random
 
@@ -20,8 +21,9 @@ module SymbolicQuartetCF
     export_symbolic_format, 
     read_topology_rand,
     network_expectedCF_formulas, 
-    make_edge_label
-    
+    make_edge_label,
+    symCF
+
     include("misc.jl")
     include("symbolicCF.jl")
     include("formatting.jl")    
