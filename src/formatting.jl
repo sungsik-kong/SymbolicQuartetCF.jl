@@ -79,7 +79,7 @@ function export_symbolic_format(net, df;
     
     #matlab output
     if(matlab)
-        filename1=filename*"_matlab"
+        filename1=filename*"_matlab.m"
         #str*="Write Matlab file: "
         #str*=(matlab ? "on\n" : "off\n")
         open("$filename1.m", "w") do file 
