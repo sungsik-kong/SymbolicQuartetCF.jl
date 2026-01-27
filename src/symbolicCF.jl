@@ -2,6 +2,7 @@ function symCF(network::HybridNetwork;
                 showprogressbar=false, 
                 inheritancecorrelation=0, 
                 symbolic=false::Bool,
+                reindex=false::Bool,
                 filename="symCF_output"::String,
                 csv=true::Bool,
                 macaulay2=false::Bool,
@@ -19,7 +20,8 @@ function symCF(network::HybridNetwork;
     quartet, taxa, df = network_expectedCF_formulas(net; 
                                                     showprogressbar=showprogressbar, 
                                                     inheritancecorrelation=inheritancecorrelation,
-                                                    symbolic=symbolic)
+                                                    symbolic=symbolic,
+                                                    reindex=reindex)
     
     #SK: Throw an error (or warning) when symbolic = false && macaulay2/matlab... = true
     !symbolic && (macaulay2 || matlab || multigraded || singular) && error("Failed to reformat because symbolic CFs were not generated. Set symbolic=true."   )
@@ -41,11 +43,6 @@ function symCF(network::HybridNetwork;
 
     return quartet, taxa, df
 end
-
-
-
-
-
 
 """
     network_expectedCF_formulas(net::HybridNetwork;
@@ -71,15 +68,14 @@ under the **network multispecies coalescent**.
 - `symbolic::Bool=false`  
   Returns numerical expressions for each CF. If `true`, returns symbolic expressions.  
 """
-function network_expectedCF_formulas(net::HybridNetwork; 
+function network_expectedCF_formulas(network::HybridNetwork; 
     showprogressbar=false, 
     inheritancecorrelation=0, 
-    symbolic=false::Bool)
+    symbolic=false::Bool,
+    reindex=false::Bool)
 
-    # This would need to added to make_edge_label and elsewhere too.
-
-    #SK: this might be an option
-    #net=reindex_edges(deepcopy(network))
+    net=deepcopy(network)
+    if(reindex) reindex_edges(net) end
 
     # data frame for CFs and dictionary translation
     df = DataFrame(Split=String[], CF=String[]) 
