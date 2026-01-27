@@ -8,7 +8,8 @@ function symCF(network::HybridNetwork;
                 matlab=false::Bool,
                 multigraded=false::Bool,
                 singular=false::Bool,
-                showAllEdgeLabels::Bool=false
+                showAllEdgeLabels::Bool=false,
+                plotting::Bool=false
                 )
 
     #reindex net
@@ -33,8 +34,10 @@ function symCF(network::HybridNetwork;
                             singular=singular)
     
     #plot using Phyloplots
-    edgelab=make_edge_label(net;showAllEdgeLabels=showAllEdgeLabels)
-    PhyloPlots.plot(net,edgelabel=edgelab)
+    if(plotting)
+        edgelab=make_edge_label(net;showAllEdgeLabels=showAllEdgeLabels)
+        PhyloPlots.plot(net,edgelabel=edgelab)
+    end
 
     return quartet, taxa, df
 end
