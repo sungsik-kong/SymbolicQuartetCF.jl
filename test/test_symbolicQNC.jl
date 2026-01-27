@@ -47,6 +47,7 @@ for rep in 1:numrepeats
                     df_symbolic=DataFrame(Split=String[], CF_symbolic=String[], CF_sym_substituted=String[], CF_val_from_symbolic=Float64[])
                     
                     testnet=SymbolicQuartetCF.read_topology_rand(i)
+                    SymbolicQuartetCF.reindex_edges(testnet)
 
                     if rep==1
                         for e in testnet.edge
