@@ -72,13 +72,7 @@ function network_expectedCF_formulas(net::HybridNetwork;
     showprogressbar=false, 
     inheritancecorrelation=0, 
     symbolic=false::Bool)
-    
-    # ESA -- possible fix to network edge number problem.  This requires the user to reset the edge numbers, and
-    # therefore we do not need to add a ! to the function name.
-        
-    # Dec 17: commenting out line below for now, to test code
-    # sort([e.number for e in net.edge])[end] == length(net.edge) || error("The edges are not numbered consecutively from 1 to $(length(net.edge)).  Please run PhyloNetworks.resetedgenumbers!() first.  Exiting.")
-    #
+
     # This would need to added to make_edge_label and elsewhere too.
 
     #SK: this might be an option
