@@ -21,8 +21,7 @@ module SymbolicQuartetCF
     export_symbolic_format, 
     read_topology_rand,
     network_expectedCF_formulas, 
-    make_edge_label,
-    symCF
+    make_edge_label
 
     include("misc.jl")
     include("symbolicCF.jl")
