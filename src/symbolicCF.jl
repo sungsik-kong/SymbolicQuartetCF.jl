@@ -67,12 +67,14 @@ under the **network multispecies coalescent**.
 
 - `symbolic::Bool=false`  
   Returns numerical expressions for each CF. If `true`, returns symbolic expressions.  
+
+- `reindex` : A boolean flag (default = `true`) that reindexes the edge numbers consecutively.   
 """
 function network_expectedCF_formulas(network::HybridNetwork; 
     showprogressbar=false, 
     inheritancecorrelation=0, 
     symbolic=false::Bool,
-    reindex=false::Bool)
+    reindex=true::Bool)
 
     net=deepcopy(network)
     if(reindex) reindex_edges(net) end
