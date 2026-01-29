@@ -8,7 +8,7 @@
 
 # SymbolicQuartetCF.jl
 
-Aloha!
+Aloha!🤙
 
 `SymbolicQuartetCF`, or simply `symCF`, is a Julia package that provides useful functions for studying mathematical identifiability of phylogenetic tree and network parameters using quartet concordance factors with techniques from algebraic statistics. This package is constructed by extending another Julia package [`QuartetNetworkGoodnessFit`](https://github.com/JuliaPhylo/QuartetNetworkGoodnessFit.jl).
 
