@@ -1,5 +1,6 @@
 [![CI](https://github.com/sungsik-kong/SymbolicQuartetCF.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/sungsik-kong/SymbolicQuartetCF.jl/actions/workflows/CI.yml)
 [![License](https://img.shields.io/github/license/sungsik-kong/SymbolicQuartetCF.jl)](https://github.com/sungsik-kong/SymbolicQuartetCF.jl/blob/main/LICENSE)
+[![Julia Version](https://img.shields.io/badge/julia-1.9%2B-blue)](https://julialang.org)
 
 
 # SymbolicQuartetCF.jl
