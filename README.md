@@ -1,3 +1,7 @@
+[![CI](https://github.com/sungsik-kong/SymbolicQuartetCF.jl/actions/workflows/CI.yml/badge.svg)](
+https://github.com/sungsik-kong/SymbolicQuartetCF.jl/actions/workflows/CI.yml)
+
+
 # SymbolicQuartetCF.jl
 
 Aloha!
