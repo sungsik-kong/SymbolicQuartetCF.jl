@@ -1,9 +1,9 @@
 [![CI](https://github.com/sungsik-kong/SymbolicQuartetCF.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/sungsik-kong/SymbolicQuartetCF.jl/actions/workflows/CI.yml)
+[![codecov](https://codecov.io/github/sungsik-kong/SymbolicQuartetCF.jl/graph/badge.svg?token=QE0D1YKYLE)](https://codecov.io/github/sungsik-kong/SymbolicQuartetCF.jl)
 [![Wiki](https://img.shields.io/badge/wiki-GitHub-blue)](https://github.com/sungsik-kong/SymbolicQuartetCF.jl/wiki)
 [![License](https://img.shields.io/github/license/sungsik-kong/SymbolicQuartetCF.jl)](https://github.com/sungsik-kong/SymbolicQuartetCF.jl/blob/main/LICENSE)
 [![Julia Version](https://img.shields.io/badge/julia-1.9%2B-blue)](https://julialang.org)
 [![PkgEval](https://juliaci.github.io/NanosoldierReports/pkgeval_badges/S/SymbolicQuartetCF.svg)](https://juliaci.github.io/NanosoldierReports/pkgeval_badges/S/SymbolicQuartetCF.html)
-[![codecov](https://codecov.io/github/sungsik-kong/SymbolicQuartetCF.jl/graph/badge.svg?token=QE0D1YKYLE)](https://codecov.io/github/sungsik-kong/SymbolicQuartetCF.jl)
 
 
 # SymbolicQuartetCF.jl
