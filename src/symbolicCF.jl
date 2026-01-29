@@ -10,7 +10,7 @@ function symCF(network::HybridNetwork;
                 multigraded=false::Bool,
                 singular=false::Bool,
                 showAllEdgeLabels::Bool=false,
-                plotting::Bool=false
+                #plotting::Bool=false
                 )
 
     #reindex net
@@ -36,12 +36,12 @@ function symCF(network::HybridNetwork;
                             singular=singular)
     
     #plot using Phyloplots
-    if(plotting)
+#    if(plotting)
         edgelab=make_edge_label(net;showAllEdgeLabels=showAllEdgeLabels)
-        PhyloPlots.plot(net,edgelabel=edgelab)
-    end
+#        PhyloPlots.plot(net,edgelabel=edgelab)
+#    end
 
-    return quartet, taxa, df
+    return quartet, taxa, df, edgelab
 end
 
 """
