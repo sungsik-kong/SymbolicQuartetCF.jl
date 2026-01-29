@@ -3,7 +3,7 @@ module SymbolicQuartetCF
     using CSV
     using DataFrames
     using PhyloNetworks
-    using PhyloPlots
+    #using PhyloPlots
     using StaticArrays
     import Random
 
