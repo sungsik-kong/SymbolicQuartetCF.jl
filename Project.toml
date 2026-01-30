@@ -1,6 +1,6 @@
 name = "SymbolicQuartetCF"
 uuid = "bdb2d313-ae54-487a-ba87-13d2dbade7fa"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["Sungsik Kong <sungsik.kong@gmail.com>"]
 
 [deps]
