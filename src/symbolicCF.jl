@@ -13,15 +13,16 @@ function symCF(network::HybridNetwork;
                 #plotting::Bool=false
                 )
 
-    #reindex net
-    net=reindex_edges(deepcopy(network))
+    #reindex net id needed
+   net=deepcopy(network)
+   if(reindex) reindex_edges(net) end
 
     #get outputs
     quartet, taxa, df = network_expectedCF_formulas(net; 
                                                     showprogressbar=showprogressbar, 
                                                     inheritancecorrelation=inheritancecorrelation,
                                                     symbolic=symbolic,
-                                                    reindex=reindex)
+                                                    reindex=false)
     
     #SK: Throw an error (or warning) when symbolic = false && macaulay2/matlab... = true
     !symbolic && (macaulay2 || matlab || multigraded || singular) && error("Failed to reformat because symbolic CFs were not generated. Set symbolic=true."   )
@@ -37,11 +38,11 @@ function symCF(network::HybridNetwork;
     
     #plot using Phyloplots
 #    if(plotting)
-        edgelab=make_edge_label(net;showAllEdgeLabels=showAllEdgeLabels)
+        edgelab=make_edge_label(net;showAllEdgeLabels=showAllEdgeLabels,reindex=false)
 #        PhyloPlots.plot(net,edgelabel=edgelab)
 #    end
 
-    return quartet, taxa, df, edgelab
+    return quartet, taxa, df, edgelab, net
 end
 
 """
