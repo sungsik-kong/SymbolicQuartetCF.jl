@@ -288,49 +288,48 @@ This function is only used for pretty plotting of the network with PhyloPlots.
 function make_edge_label(network::PhyloNetworks.HybridNetwork; showAllEdgeLabels::Bool=false, reindex::Bool=true)
 
    net=deepcopy(network)
-   if(reindex) reindex_edges(net) end
-
+   if(reindex) reindex_edges(net) end  
   # get internal edge numbers unless want all edges labeled
   edge_numbers_to_include = [e.number for e in net.edge if !PhyloNetworks.getchild(e).leaf || showAllEdgeLabels]
   
   hybridNodeInds = findall(n -> n.hybrid, net.node)
   hybridNodeNumbers = [n.number for n in net.node[hybridNodeInds]]
     
-  if !showAllEdgeLabels
+    if !showAllEdgeLabels
 
-    edge_numbers_to_remove = []
-    
-    # first check if root is parent of leaf.  If so, do not label two descendant edges.
-    if findfirst(e -> getchild(e).leaf, net.node[net.rooti].edge) !== nothing
-      edge_numbers_to_remove = [e.number for e in net.node[net.rooti].edge]
-    end
-    
-    # now check if hyrid nodes have only one descendant.  If so, do not use edge lengths.
-    hybridNodesWithOneLeafDescendant = [n for n in net.node[hybridNodeInds] if getchild(n).leaf]
-    for n in hybridNodesWithOneLeafDescendant
-      push!(edge_numbers_to_remove, getparentedge(n).number)
-      push!(edge_numbers_to_remove, getparentedgeminor(n).number)
-    end
+        edge_numbers_to_remove = []
 
-    # get hybrid edge numbers for including the gammas in the label
-    gamma_df = DataFrame(number=Int[],label=String[])
-    for (j, hybNode) in enumerate(hybridNodeNumbers)    
-      incoming = [e.number for e in net.edge if PhyloNetworks.getchild(e).number == hybNode]
-      if length(incoming) != 2
-        error("Hybrid node $hybNode has $(length(incoming)) incoming edges (expected 2).")
-      end
-      for (k, eNum) in enumerate(incoming)
-        # label = k == 1 ? "γ = " * rLab*"{$j}" : "1-γ = " * "1 - "*rLab*"{$j}"
-        label = k == 1 ? "γ = " * gLab*"{$j}" : "1-γ = " * "1 - "*gLab*"{$j}"
-        push!(gamma_df, (number = eNum, label = label))      
-      end
+        # first check if root is parent of leaf.  If so, do not label two descendant edges.
+        if findfirst(e -> getchild(e).leaf, net.node[net.rooti].edge) !== nothing
+            edge_numbers_to_remove = [e.number for e in net.node[net.rooti].edge]
+        end
+
+        # now check if hyrid nodes have only one descendant.  If so, do not use edge lengths.
+        hybridNodesWithOneLeafDescendant = [n for n in net.node[hybridNodeInds] if getchild(n).leaf]
+        for n in hybridNodesWithOneLeafDescendant
+            push!(edge_numbers_to_remove, getparentedge(n).number)
+            push!(edge_numbers_to_remove, getparentedgeminor(n).number)
+        end
+
+        if !isempty(edge_numbers_to_remove)
+            setdiff!(edge_numbers_to_include, edge_numbers_to_remove)
+        end
     end
 
-    if !isempty(edge_numbers_to_remove)
-      setdiff!(edge_numbers_to_include, edge_numbers_to_remove)
-    end
-  end
-  
+        # get hybrid edge numbers for including the gammas in the label
+        gamma_df = DataFrame(number=Int[],label=String[])
+        for (j, hybNode) in enumerate(hybridNodeNumbers)    
+            incoming = [e.number for e in net.edge if PhyloNetworks.getchild(e).number == hybNode]
+            if length(incoming) != 2
+                error("Hybrid node $hybNode has $(length(incoming)) incoming edges (expected 2).")
+            end
+            for (k, eNum) in enumerate(incoming)
+                # label = k == 1 ? "γ = " * rLab*"{$j}" : "1-γ = " * "1 - "*rLab*"{$j}"
+                label = k == 1 ? "γ = " * gLab*"{$j}" : "1-γ = " * "1 - "*gLab*"{$j}"
+                push!(gamma_df, (number = eNum, label = label))      
+            end
+        end
+
   df = DataFrame(
     number=[num for num in edge_numbers_to_include],
     label=["t_{$num}" for num in edge_numbers_to_include]
