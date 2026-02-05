@@ -744,27 +744,28 @@ end
 
 
 """
-    function cleanLabels!(df::DataFrame)
+    function clean_labels(df::DataFrame)
 
-  # Description
-Strip braces and underscores from symbolic labels.  Can be used in formatting output 
-or for plotting.
+# Description
+Strip braces and underscores from symbolic labels.  Can be used in for pretty
+formatting of output.
 - `df` a DataFrame with the symbolic CFs stored in a column called CF.
 
-  # Returns
-- `df` DataFrame with the new labels
+# Returns
+- `df_new` a new DataFrame with the new clean labels.  The original df is not changed.
 """
-function cleanLabels(df::DataFrame)
+function clean_labels(df::DataFrame)
+    df_copy = deepcopy(df)
   subs = Dict("{" => "", "}" => "","_"=>"")
   subs2 = Dict("r1"=>"g1","r2"=>"g2")
   
   for (k,v) in subs
-    df.CF .= replace.(df.CF,k => v)
+    df_copy.CF .= replace.(df_copy.CF,k => v)
   end
   for (k,v) in subs2
-    df.CF .= replace.(df.CF,k => v)
+    df_copy.CF .= replace.(df_copy.CF,k => v)
   end
-  return(df)
+  return(df_copy)
 end
 
 

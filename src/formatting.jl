@@ -5,7 +5,7 @@
 - Print symbolic CFs to csv file. 
 """
 function export_csv(df; filename="symCF_output"::String)
-    df_clean=cleanLabels(deepcopy(df))
+    df_clean=clean_labels(deepcopy(df))
     CSV.write("$filename.csv",df_clean,header=false)
 end
 
