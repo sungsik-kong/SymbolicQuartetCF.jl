@@ -261,7 +261,7 @@ function reindex_edges(net::HybridNetwork)
 end
 
 """
-    make_edge_label(net::HybridNetwork; showTerminalEdgeLabels::Bool=false)
+    make_edge_label(net::HybridNetwork; showTerminalEdgeLabels::Bool=false, reindex::Bool=true)
 
 Generates a dataframe mapping edge numbers to their symbolic labels.
 
