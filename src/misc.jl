@@ -238,7 +238,7 @@ adn terminal edges begin from the total number of edges in descending order.
 - `net`: A `HybridNetwork` object.
 
 ## Returns
-- `net`: An updated `HybridNetwork` object.
+- `net`: An updated `HybridNetwork` object with internal edges numbered 1, 2, etc.
 """
 function reindex_edges(net::HybridNetwork)
     internal_idx = 1
