@@ -49,7 +49,8 @@ end
     network_expectedCF_formulas(net::HybridNetwork;
         showprogressbar=false,
         inheritancecorrelation=0,
-        symbolic=false)
+        symbolic=false.
+        reindex=true)
 
 This is the main function of **symCF**. This function iterates over *all* quartets of taxa in `net` and
 generates the symbolic and numerical formulas that compute **expected quartet concordance factors (CFs)** 
@@ -70,7 +71,7 @@ under the **network multispecies coalescent**.
   Returns numerical expressions for each CF. If `true`, returns symbolic expressions.  
 
 - `reindex::Bool=true`
-  A boolean flag (default = `true`) that reindexes the edge numbers consecutively.   
+  A boolean flag (default = `true`) that reindexes the internal edge numbers consecutively.   
 """
 function network_expectedCF_formulas(network::HybridNetwork; 
     showprogressbar=false, 

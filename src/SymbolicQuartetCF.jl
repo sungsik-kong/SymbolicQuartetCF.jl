@@ -22,7 +22,9 @@ module SymbolicQuartetCF
     read_topology_rand,
     network_expectedCF_formulas, 
     make_edge_label,
-    clean_labels
+    clean_labels,
+    reindex_edges
+
 
     include("misc.jl")
     include("symbolicCF.jl")
