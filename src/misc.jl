@@ -230,9 +230,9 @@ end
 Re-index edge numbers. 
 
 ## Description
-Internal tree edge numbers begin from 1, 
+Internal tree edge numbers altered to begin from 1, 
 hybrid edges begin from (total number of edges - number of leaves), 
-adn terminal edges begin from the total number of edges in descending order.
+and terminal edges begin from the total number of edges in descending order.
 
 ## Arguments
 - `net`: A `HybridNetwork` object.
@@ -266,11 +266,13 @@ end
 Generates a dataframe mapping edge numbers to their symbolic labels.
 
 ## Description
-This function creates labels for the edges of a `HybridNetwork` in the format `"te"`, where `e` is a number associated this that edge.  
+This function creates labels for the edges of a `HybridNetwork` in the format `"te"`, 
+where `e` is a number associated this that edge.  
 By default, labels are only assigned to **non-terminal edges** (i.e., edges that do not end at leaf nodes).  
-The dataframe returned is used as input for PhyloPlots' option `edgelabel=`. 
+The D?ataFrame returned is used as input for PhyloPlots' option `edgelabel=`. 
 Setting `showTerminalEdgeLabels=true` includes labels for terminal edges as well.
-This function is only used for pretty plotting of the network with PhyloPlots.
+This function is only used for pretty plotting of the network with PhyloPlots
+and should be used typically after `reindex_edges()`.  See below.
 
 ## Arguments
 - `net`: A `HybridNetwork` object.
