@@ -23,8 +23,7 @@ module SymbolicQuartetCF
     network_expectedCF_formulas, 
     make_edge_label,
     reindex_edges,
-    clean_labels,\
-
+    clean_labels
 
     include("misc.jl")
     include("symbolicCF.jl")
