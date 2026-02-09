@@ -165,8 +165,7 @@ mapping taxon labels in to their indices in `taxa`, for easier lookup.
 
 `net` is not modified.
 
-For `inheritancecorrelation` see [`network_expectedCF`](@ref).
-Its value should be between 0 and 1 (not checked by this internal function).
+For `inheritancecorrelation` its value should be between 0 and 1 (not checked by this internal function).
 """
 function network_expectedCF!(quartet::PN.QuartetT{MVector{3,Float64}},
     net::HybridNetwork, 
@@ -223,8 +222,7 @@ the 2 edges incident to the root are fused (if the root is of degree 2),
 and external degree-2 blobs are removed. `net` is then simplified recursively
 by removing hybrid edges for the recursive calculation of qCFs.
 
-For `inheritancecorrelation` see [`network_expectedCF`](@ref).
-Its value should be between 0 and 1 (not checked by this internal function).
+For `inheritancecorrelation` its value should be between 0 and 1 (not checked by this internal function).
 """
 function network_expectedCF_4taxa!(net::HybridNetwork, fourtaxa, inheritancecorrelation, qCFp, symbolic,synth_e_dict)
     #((((b:1.0,(a:1.0,e:1.0):1.0):1.0,(((c:1.0,d:1.0):1.0)#H5:1.0::0.5)#H4:1.0::0.5):1.0,#H4:1.0::0.5):1.0,#H5:1.0::0.5);
