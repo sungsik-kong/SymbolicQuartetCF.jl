@@ -6,7 +6,7 @@ makedocs(
     modules  = [SymbolicQuartetCF],
     pages = [
         "Home" => "index.md",
-        "API"  => "api.md",
+        "Functions"  => "functions.md",
     ],
 )
 
