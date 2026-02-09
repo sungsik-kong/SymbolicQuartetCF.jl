@@ -1,7 +1,9 @@
-# SymbolicQuartetCF.jl
+## Aloha!
 
-Symbolic computation of quartet concordance factors for phylogenetic networks.
+[`SymbolicQuartetCF.jl`](https://github.com/sungsik-kong/SymbolicQuartetCF.jl) or simply [`symCF`](https://github.com/sungsik-kong/SymbolicQuartetCF.jl) is a Julia package that provides functions to compute symbolic quartet concordance factors (CFs) for a model network _N_ under the Network Multispecies Coalescent Model (NMSC).  For a model network _N_ on _n_ taxa given in Newick notation, `symCF` will compute all $3 \cdot \binom{n}{4}$ concordance factors.  The main function `network_expectedCF_formulas` can return either numerical CFs or symbolic ones, with an option to save a DataFrame of symbolic CFs to a `csv` file. 
 
-```julia
-using SymbolicQuartetCF
-```
+Symbolic quartet CFs might be used for studying the mathematical identifiability of phylogenetic tree and network parameters under the NMSC with techniques from algebraic statistics.  To that end, `symCF` has options to create output files in Macaulay2, Singular, and MATLAB format.  The Macaulay2 and Singular files define the parameterized algebraic variety associated to the network _N_ under the NMSC, and include lines to compute the implicit description of _V_.  The MATLAB file is a script that computes the dimension of the parameterization map.
+
+This package builds on the Julia package [`QuartetNetworkGoodnessFit.jl`](https://github.com/JuliaPhylo/QuartetNetworkGoodnessFit.jl).
+
+_Note: This project was started during the [Algebraic Methods in Phylogenetics Workshop](https://sites.google.com/hawaii.edu/summer-workshops-at-manoa/algebra-of-phylogenetics), which was held at the University of Hawai'i at Mānoa. That explains the use of Hawaiian terms throughout this wiki page and the software package._
