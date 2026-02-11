@@ -160,22 +160,6 @@ Additionally, it extracts and returns a **sorted list of unique symbolic paramet
 - A sorted vector of unique symbolic parameters used in the CF equations.
 """   
 function gettingSymbolicInput(net::HybridNetwork, df, inheritancecorrelation)
-    # ESA
-    # need to get the numbers of the edges.  My test network has numbers:
-    # julia> foreach(x -> println(x.number), ntwk_X.edge)
-    # 7
-    # 8
-    # 20
-    # 21
-    # 22
-    # 23
-    # 24
-    # 25
-    # 26
-    # 27
-    # 28
-    # so 1:edgenumber does not work.  It's also sort of a problem for the strings.
-    #edgenumber = length(net.edge)
     edgenumbers = [e.number for e in net.edge]
     retnumber = length(net.hybrid)
     numCFs = size(df, 1)
@@ -190,16 +174,13 @@ function gettingSymbolicInput(net::HybridNetwork, df, inheritancecorrelation)
         df[i, 2] = replace(df[i, 2], "rho" => "$inheritancecorrelation")
         expressions = String[]
         
-        #for e in 1:edgenumber
         for e in edgenumbers
-            # if occursin("-t_{$e}", df[i, 2])
             if occursin("-"*eletter*"_{$e}", df[i, 2])
                 push!(expressions, "X$e")
             end
         end
         
         for e in 1:retnumber
-            # if occursin("r_{$e}", df[i, 2])
             if occursin(gletter*"_{$e}", df[i, 2])
                 push!(expressions, uppercase(gletter)*"$e")
             end
@@ -211,9 +192,6 @@ function gettingSymbolicInput(net::HybridNetwork, df, inheritancecorrelation)
     
     # Replace symbolic expressions in CF equations
     for cf in 1:numCFs
-        # df[cf, 2] = replace(df[cf, 2], "r_{" => "R")   # Replace hybrid parameter notation
-        # df[cf, 2] = replace(df[cf, 2], "exp(-t_{" => "(X")  # Replace exponential notation
-        # df[cf, 2] = replace(df[cf, 2], "-t_{" => "*X")  # Replace edge length notation
         df[cf, 2] = replace(df[cf, 2], gletter *"_{" => uppercase(gletter))   # Replace hybrid parameter notation
         df[cf, 2] = replace(df[cf, 2], "exp(-"*eletter*"_{" => "(X")  # Replace exponential notation
         df[cf, 2] = replace(df[cf, 2], "-"*eletter*"_{" => "*X")  # Replace edge length notation 
