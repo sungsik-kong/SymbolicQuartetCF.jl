@@ -2,7 +2,7 @@
         function export_csv(df; filename="symCF_output"::String)
 
 # Description
-- Print symbolic CFs to csv file. 
+- Print symbolic CFs stored in `df` to csv file. 
 """
 function export_csv(df; filename="symCF_output"::String)
     df_clean=clean_labels(deepcopy(df))
@@ -22,10 +22,17 @@ end
 
 # Description
 - Print symbolic CFs to csv file. (default)
-- Format symbolic CF formulas for use in Macaulay2, Singular, and Matlab when 
+- Format symbolic CF formulas for use in Macaulay2, Singular, and MATLA when 
         Booleans `macaulay2`, `matlab`, and/or `singular` are true.  When
-        `multigraded` is true,additional Macaulay2 code for implicitization 
+        `multigraded` is true, additional Macaulay2 code for implicitization 
         using the MultigradedImplicitization package in Macaulay2 is written.
+
+## Arguments
+- The Booleans `macaulay2`, `matlab`, `multigraded`, `singular` control 
+        whether output files in Macalay2, MATLAB, and Singular format are written
+        to files with prefixes given by `filename`.
+- Other arguments are the network `net`, `DataFrame` containing the quaret CFs,
+        and an option to choose a correlated NMSC if `inheritancecorrelation` is input.
 """
 function export_symbolic_format(net, df;
     inheritancecorrelation=0.0::Float64,
