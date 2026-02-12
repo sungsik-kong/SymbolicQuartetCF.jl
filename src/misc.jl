@@ -255,8 +255,8 @@ and should be used typically after `reindex_edges()`.  See below.
 ## Arguments
 - `net`: A `HybridNetwork` object.
 - `showAllEdgeLabels`: A boolean flag (default = `false`).  
-   - `false`: Excludes terminal edges, hybrid edges with one leaf descendant, 
-                and terminal edges with parent the root.  
+   - `false`: Excludes terminal edges, hybrid edges with one leaf descendant, and
+              edges incident to the root if one of these edges is terminal.
    - `true`: Includes all edges.  
 - `reindex` : A boolean flag (default = `true`) that reindexes the edge numbers consecutively.
 
