@@ -1,0 +1,25 @@
+ 1045  lt
+ 1046  cd src
+ 1047  egrep symbolicCF.jl -e deepcopy -n
+ 1048  egrep *.jl -e deepcopy -n
+ 1049  cd
+ 1050  symCF
+ 1051  git pull rebase = true
+ 1052  git pull --rebase=true
+ 1053  git stash
+ 1054  joss
+ 1055  git log
+ 1056  p1
+ 1057  git commit -m 'totally minor edits;  added file to keep track of JG changes'
+ 1058  ls
+ 1059  git push
+ 1060  git pull --rebase=true
+ 1061  cd sr
+ 1062  cd src
+ 1063  lt
+ 1064  symCF
+ 1065  git pull --rebase=true
+ 1066  git pull
+ 1067  cd src
+ 1068  egrep * -e 'ESA' -n -A 2
+ 1069  h > TTTT | egrep TTTT -e 'deepcopy'
