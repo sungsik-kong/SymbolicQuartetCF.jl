@@ -218,7 +218,9 @@ and terminal edges begin from the total number of edges in descending order.
 ## Returns
 - `net`: An updated `HybridNetwork` object with internal edges numbered 1, 2, etc.
 """
-function reindex_edges(net::HybridNetwork)
+function reindex_edges(network::HybridNetwork)
+    net=deepcopy(network)
+    
     internal_idx = 1
     hybrid_idx   = length(net.edge) - net.numtaxa
     leaf_idx     = length(net.edge)
