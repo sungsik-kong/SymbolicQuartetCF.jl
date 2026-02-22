@@ -219,12 +219,12 @@ and terminal edges begin from the total number of edges in descending order.
 - `net`: An updated `HybridNetwork` object with internal edges numbered 1, 2, etc.
 """
 function reindex_edges(network::HybridNetwork)
-    net=deepcopy(network)
+    net_copy=deepcopy(network)
     
     internal_idx = 1
-    hybrid_idx   = length(net.edge) - net.numtaxa
-    leaf_idx     = length(net.edge)
-    for edge in net.edge
+    hybrid_idx   = length(net_copy.edge) - net_copy.numtaxa
+    leaf_idx     = length(net_copy.edge)
+    for edge in net_copy.edge
         child = PhyloNetworks.getchild(edge)
         if !child.leaf && !child.hybrid
             edge.number = internal_idx
@@ -237,7 +237,7 @@ function reindex_edges(network::HybridNetwork)
             leaf_idx -= 1
         end
     end
-    return net
+    return net_copy
 end
 
 """
@@ -269,8 +269,7 @@ and should be used typically after `reindex_edges()`.  See below.
 """
 function make_edge_label(network::PhyloNetworks.HybridNetwork; showAllEdgeLabels::Bool=false, reindex::Bool=true)
     
-    net=deepcopy(network)
-    if(reindex) reindex_edges(net) end  
+    net = reindex ? reindex_edges(deepcopy(network)) : deepcopy(network)
     # get internal edge numbers unless want all edges labeled
     edge_numbers_to_include = [e.number for e in net.edge if !PhyloNetworks.getchild(e).leaf || showAllEdgeLabels]
     
