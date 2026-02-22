@@ -46,8 +46,9 @@ for rep in 1:numrepeats
                     df_numeric=DataFrame(Split=String[], CF_numeric=String[], CF_val_from_numeric=Float64[])
                     df_symbolic=DataFrame(Split=String[], CF_symbolic=String[], CF_sym_substituted=String[], CF_val_from_symbolic=Float64[])
                     
-                    testnet=SymbolicQuartetCF.read_topology_rand(i)
-                    SymbolicQuartetCF.reindex_edges(testnet)
+                    testnet0=SymbolicQuartetCF.read_topology_rand(i)
+                    testnet=SymbolicQuartetCF.reindex_edges(testnet0)
+                    @test maximum([e.number for e in testnet.edge]) == length(testnet.edge)  || error("reindex_edges might not be working properly.")
 
                     if rep==1
                         for e in testnet.edge
