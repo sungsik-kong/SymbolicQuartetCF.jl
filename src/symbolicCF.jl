@@ -14,8 +14,7 @@ function symCF(network::HybridNetwork;
                 )
 
     #reindex net id needed
-   net=deepcopy(network)
-   if(reindex) reindex_edges(net) end
+    net = reindex ? reindex_edges(deepcopy(network)) : deepcopy(network)
 
     #get outputs
     quartet, taxa, df = network_expectedCF_formulas(net; 
@@ -79,8 +78,7 @@ function network_expectedCF_formulas(network::HybridNetwork;
     symbolic=false::Bool,
     reindex=true::Bool)
 
-    net=deepcopy(network)
-    if(reindex) reindex_edges(net) end
+    net = reindex ? reindex_edges(deepcopy(network)) : deepcopy(network)
 
     # data frame for CFs and dictionary translation
     df = DataFrame(Split=String[], CF=String[]) 
