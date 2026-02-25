@@ -72,6 +72,7 @@ If you see the Hawaiian "shaka" hand gesture, relax and take it easy,
 because your `SymbolicQuartetNetworkCoal.jl` is installed correctly.
 """
 function aloha(;scale::Int=1)
+    #println("Hello.")
     ascii = raw"""
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣴⠂⢀⡀⠀⢀⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣤⣄⣠⣀⠀⠘⠋⠉⠉⠁⠀⠺⣿⡷⣿⣿⣿⡿⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -241,7 +242,7 @@ function reindex_edges(network::HybridNetwork)
 end
 
 """
-    make_edge_label(net::HybridNetwork; showTerminalEdgeLabels::Bool=false, reindex::Bool=true)
+    make_edge_label(net::HybridNetwork; showTerminalEdgeLabels::Bool=false)
 
 Generates a dataframe mapping edge numbers to their symbolic labels.
 
@@ -260,16 +261,18 @@ and should be used typically after `reindex_edges()`.  See below.
    - `false`: Excludes terminal edges, hybrid edges with one leaf descendant, and
               edges incident to the root if one of these edges is terminal.
    - `true`: Includes all edges.  
-- `reindex` : A boolean flag (default = `true`) that reindexes the edge numbers consecutively.
 
 ## Returns
 - A `DataFrame` with columns:
   - `number`: Edge numbers.
   - `label`: Corresponding symbolic labels (`"t1, γ = g1"`).
 """
-function make_edge_label(network::PhyloNetworks.HybridNetwork; showAllEdgeLabels::Bool=false, reindex::Bool=true)
+function make_edge_label(network::PhyloNetworks.HybridNetwork; showAllEdgeLabels::Bool=false)
+    net = deepcopy(network)
+    # , reindex::Bool=true
+    # net = reindex ? reindex_edges(deepcopy(network)) : deepcopy(network)
+    # - `reindex` : A boolean flag (default = `true`) that reindexes the edge numbers consecutively.
     
-    net = reindex ? reindex_edges(deepcopy(network)) : deepcopy(network)
     # get internal edge numbers unless want all edges labeled
     edge_numbers_to_include = [e.number for e in net.edge if !PhyloNetworks.getchild(e).leaf || showAllEdgeLabels]
     
