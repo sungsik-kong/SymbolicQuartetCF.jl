@@ -122,7 +122,7 @@ Each `1` in the binary string indicates a position, counted from the rightmost b
 - String : A string representing positions of '1's in the form "t_1-t_3-...".
 
 ## Examples:
-- binary_to_tstring("10101") # returns "t_5-t_3-t_1"
+- binary_to_tstring("10101") # returns "t\_5-t_3-t_1-"
 - binary_to_tstring("0100") # returns "t_3"
 """
 function binary_to_tstring(binary_str::String; edge_label=eLab::String)
