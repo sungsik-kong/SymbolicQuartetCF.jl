@@ -110,7 +110,7 @@ function aloha(;scale::Int=1)
 end
 
 """
-    binary_to_tstring(binary_str::String) -> String
+    binary_to_tstring(binary_str::String)
 
 Convert a binary string (e.g., "10101") into a string of positions prefixed by the global constant eLab (`t_` by default) and joined by `-`.
 Each `1` in the binary string indicates a position, counted from the rightmost bit as position 1.
@@ -250,7 +250,7 @@ Generates a dataframe mapping edge numbers to their symbolic labels.
 This function creates labels for the edges of a `HybridNetwork` in the format `"te"`, 
 where `e` is a number associated this that edge.  
 By default, labels are only assigned to **non-terminal edges** (i.e., edges that do not end at leaf nodes).  
-The D?ataFrame returned is used as input for PhyloPlots' option `edgelabel=`. 
+The DataFrame returned is used as input for PhyloPlots' option `edgelabel=`. 
 Setting `showTerminalEdgeLabels=true` includes labels for terminal edges as well.
 This function is only used for pretty plotting of the network with PhyloPlots
 and should be used typically after `reindex_edges()`.  See below.
