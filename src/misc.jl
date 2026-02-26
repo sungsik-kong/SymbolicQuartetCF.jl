@@ -268,9 +268,6 @@ and should be used typically after `reindex_edges()`.  See below.
 """
 function make_edge_label(network::PhyloNetworks.HybridNetwork; showAllEdgeLabels::Bool=false)
     net = deepcopy(network)
-    # , reindex::Bool=true
-    # net = reindex ? reindex_edges(deepcopy(network)) : deepcopy(network)
-    # - `reindex` : A boolean flag (default = `true`) that reindexes the edge numbers consecutively.
     
     # get internal edge numbers unless want all edges labeled
     edge_numbers_to_include = [e.number for e in net.edge if !PhyloNetworks.getchild(e).leaf || showAllEdgeLabels]

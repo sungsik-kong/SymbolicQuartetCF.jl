@@ -37,7 +37,7 @@ function symCF(network::HybridNetwork;
     
     #plot using Phyloplots
 #    if(plotting)
-        edgelab=make_edge_label(net;showAllEdgeLabels=showAllEdgeLabels)#,reindex=false)
+        edgelab=make_edge_label(net;showAllEdgeLabels=showAllEdgeLabels)
 #        PhyloPlots.plot(net,edgelabel=edgelab)
 #    end
 
