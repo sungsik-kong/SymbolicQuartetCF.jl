@@ -64,7 +64,8 @@ complex phylogenetic model networks, help in the development of new network infe
 under the NMSC, and further strengthen the interdisciplinary bond 
 between mathematical and computational phylogenetics.  
 
-![Figure 1. Graphical workflow in [`symCF`](). The input species network topology on five taxa, $A,B,C,D,$ and $E$ (left), is decomposed into a set of quartets each of which contains four taxa (center), and [`symCF`]() generates symbolic formulas for the 3 expected qCFs for each of the $5\choose 4$ quartets (right). \label{fig:pipeline}](Figures/Figure-pipeline.png){width=80% style="display:block; margin-left:auto; margin-right:auto;"}
+![Figure 1. Graphical workflow in [`symCF`](). The input species network topology on five taxa, $A,B,C,D,$ and $E$ (left), is decomposed into a set of quartets each of which contains four taxa (center), and [`symCF`]() generates symbolic formulas for the 3 expected qCFs for each of the $5\choose 4$ quartets (right). \label{fig:pipeline}](Figures/Figure-pipeline.png)
+<!--{width=80% style="display:block; margin-left:auto; margin-right:auto;"}-->
 
 ### Statement of need
 
@@ -152,7 +153,8 @@ julia> using PhyloPlots
 julia> plot(reindexednet,edgelabel=edgelabel)
 ```
 
-![Figure 2. Visualizing symbolic parameter names on a topology using `make_edge_label` and `PhyloPlots`.](Figures/Figure-network-labelled.png){width=50% style="display:block; margin-left:auto; margin-right:auto;" label="fig:networkPlot"}
+![Figure 2. Visualizing symbolic parameter names on a topology using `make_edge_label` and `PhyloPlots`.](Figures/Figure-network-labelled.png)
+<!--{width=50% style="display:block; margin-left:auto; margin-right:auto;" label="fig:networkPlot"}-->
 
 ### Author contributions
 
