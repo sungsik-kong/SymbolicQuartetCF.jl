@@ -22,7 +22,7 @@ end
 
 # Description
 - Print symbolic CFs to csv file. (default)
-- Format symbolic CF formulas for use in Macaulay2, Singular, and MATLA when 
+- Format symbolic CF formulas for use in Macaulay2, Singular, and MATLAB when 
         Booleans `macaulay2`, `matlab`, and/or `singular` are true.  When
         `multigraded` is true, additional Macaulay2 code for implicitization 
         using the MultigradedImplicitization package in Macaulay2 is written.
